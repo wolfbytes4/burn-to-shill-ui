@@ -1,13 +1,41 @@
 // Dependencies
 import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { getWalletClient } from "../helpers/wallethelper.ts";
 
 // App  page
 const AppPage = ({ title }) => {
   // Title
   document.title = title;
-
+  const [walletClient, setWalletClient] = useState();
   // Hooks
   const navigate = useNavigate();
+  const connectWallet = async () => {
+    const wc = await getWalletClient();
+    localStorage.setItem("burn-connected", "connected");
+    setWalletClient(wc);
+    navigate("/app/dashboard");
+  };
+
+  const initWallet = async () => {
+    let connected = localStorage.getItem("burn-connected");
+    if (connected === "connected") {
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      while (
+        !window.keplr ||
+        !window.getEnigmaUtils ||
+        !window.getOfflineSignerOnlyAmino
+      ) {
+        await sleep(100);
+      }
+      await connectWallet();
+      navigate("/app/dashboard");
+    }
+  };
+
+  useEffect(() => {
+    initWallet();
+  });
 
   return (
     <main className="app-page">
@@ -22,13 +50,7 @@ const AppPage = ({ title }) => {
               order to start burning.
             </p>
 
-            <button
-              onClick={() => {
-                navigate("/app/dashboard");
-              }}
-            >
-              Connect Wallet
-            </button>
+            <button onClick={() => connectWallet()}>Connect Wallet</button>
           </div>
         </div>
       </section>

@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 // App
-import "./assets/css/index.css";
+import "./assets/css/index.scss";
 import App from "./App";
 
 // Root

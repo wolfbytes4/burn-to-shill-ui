@@ -41,8 +41,8 @@ select {
 
 img {
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   pointer-events: none;
 }
 
@@ -161,20 +161,28 @@ img {
     pointer-events: none;
     transition: all 0.3s ease;
   }
-  .navigation-bar-component .container .navigation-bar-component-elements.active {
+  .navigation-bar-component
+    .container
+    .navigation-bar-component-elements.active {
     transform: scale(1);
     opacity: 1;
     pointer-events: all;
   }
 }
-.navigation-bar-component .container .navigation-bar-component-elements .hamburger-menu-close-btn {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  .hamburger-menu-close-btn {
   position: absolute;
   top: 15px;
   right: 15px;
   display: none;
 }
 @media only screen and (max-width: 1024px) {
-  .navigation-bar-component .container .navigation-bar-component-elements .hamburger-menu-close-btn {
+  .navigation-bar-component
+    .container
+    .navigation-bar-component-elements
+    .hamburger-menu-close-btn {
     display: flex;
   }
 }
@@ -194,25 +202,46 @@ img {
   margin-right: 30px;
 }
 @media only screen and (max-width: 1024px) {
-  .navigation-bar-component .container .navigation-bar-component-elements ul li {
+  .navigation-bar-component
+    .container
+    .navigation-bar-component-elements
+    ul
+    li {
     margin-bottom: 15px;
     margin-right: 0;
   }
 }
-.navigation-bar-component .container .navigation-bar-component-elements ul li:last-child {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  ul
+  li:last-child {
   margin-bottom: 0;
   margin-right: 0;
 }
-.navigation-bar-component .container .navigation-bar-component-elements ul li a {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  ul
+  li
+  a {
   display: flex;
   font-size: 18px;
   font-weight: 700;
   transition: all 0.3s ease;
 }
-.navigation-bar-component .container .navigation-bar-component-elements ul li a:hover {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  ul
+  li
+  a:hover {
   color: rgba(0, 0, 0, 0.5);
 }
-.navigation-bar-component .container .navigation-bar-component-elements .cta-btn {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  .cta-btn {
   width: 165px;
   height: 50px;
   border: 3px solid #000000;
@@ -223,7 +252,10 @@ img {
   font-weight: 700;
   transition: all 0.3s ease;
 }
-.navigation-bar-component .container .navigation-bar-component-elements .cta-btn:hover {
+.navigation-bar-component
+  .container
+  .navigation-bar-component-elements
+  .cta-btn:hover {
   box-shadow: none;
 }
 
@@ -274,13 +306,24 @@ img {
   margin-right: 12px;
   display: flex;
 }
-tr .footer-component .container .footer-component-top .social-links a:last-child {
+tr
+  .footer-component
+  .container
+  .footer-component-top
+  .social-links
+  a:last-child {
   margin-right: 0px;
 }
 .footer-component .container .footer-component-top .social-links a svg path {
   transition: all 0.3s ease;
 }
-.footer-component .container .footer-component-top .social-links a:hover svg path {
+.footer-component
+  .container
+  .footer-component-top
+  .social-links
+  a:hover
+  svg
+  path {
   fill: #c8a0fd;
 }
 .footer-component .container .footer-component-bottom {
@@ -515,7 +558,7 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   height: 180px;
   border: 4px solid #c8a0fd;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 @media only screen and (max-width: 1024px) {
@@ -793,7 +836,14 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   color: rgba(0, 0, 0, 0.5);
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .stats .stats-right .box h3 span {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .stats
+    .stats-right
+    .box
+    h3
+    span {
     font-size: 16px;
   }
 }
@@ -816,7 +866,13 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   flex-wrap: wrap;
   gap: 10px;
 }
-.app-dashboard-page .hero-section .container .pools .tab-nav .tab-nav-btns button {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .tab-nav
+  .tab-nav-btns
+  button {
   padding: 0 18px;
   height: 30px;
   border: 2px solid #000000;
@@ -827,10 +883,22 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   font-weight: 700;
   transition: all 0.3s ease;
 }
-.app-dashboard-page .hero-section .container .pools .tab-nav .tab-nav-btns button:hover {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .tab-nav
+  .tab-nav-btns
+  button:hover {
   box-shadow: none;
 }
-.app-dashboard-page .hero-section .container .pools .tab-nav .tab-nav-btns button.active {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .tab-nav
+  .tab-nav-btns
+  button.active {
   background: #c8a0fd;
 }
 .app-dashboard-page .hero-section .container .pools .table {
@@ -859,14 +927,27 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   grid-template-columns: 1fr;
   grid-gap: 20px;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row {
   width: 100%;
   border: 5px solid #000000;
   background: #f6f0ff;
   box-shadow: 5px 5px 0 #000000;
   border-radius: 35px;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content {
   width: 100%;
   padding: 15px 25px 15px 15px;
   display: grid;
@@ -874,63 +955,164 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   align-items: center;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content {
     padding: 30px;
     grid-template-columns: 1fr;
     grid-gap: 35px;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .asset {
   display: flex;
   align-items: center;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .asset {
     flex-direction: column;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset img {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .asset
+  img {
   margin-right: 15px;
   width: 150px;
   border-radius: 20px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset img {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .asset
+    img {
     order: 2;
     margin-top: 10px;
     margin-right: 0;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset h3 {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .asset
+  h3 {
   font-size: 17px;
   font-weight: 700;
   line-height: 27px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content .asset h3 {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .asset
+    h3 {
     text-align: center;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content p {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p {
   font-size: 14px;
   line-height: 24px;
   font-weight: 700;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content p {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    p {
     font-size: 16px;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content p span {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p
+  span {
   color: rgba(0, 0, 0, 0.5);
   display: none;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content p span {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    p
+    span {
     display: block;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content button {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  button {
   width: 100%;
   height: 50px;
   border: 3px solid #000000;
@@ -941,30 +1123,78 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   font-weight: 700;
   transition: all 0.3s ease;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .content button:hover {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  button:hover {
   box-shadow: none;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage {
   width: 100%;
   padding: 0 15px 15px 15px;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .manage
+    .boxes {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media only screen and (max-width: 768px) {
-  .app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes {
+  .app-dashboard-page
+    .hero-section
+    .container
+    .pools
+    .table
+    .table-box-rows
+    .table-box-row
+    .manage
+    .boxes {
     grid-template-columns: 1fr;
   }
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes .box {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes
+  .box {
   width: 100%;
   padding: 25px;
   border: 5px solid #000000;
@@ -974,16 +1204,46 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   flex-direction: column;
   justify-content: space-between;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes .box img {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes
+  .box
+  img {
   margin-bottom: 12px;
   width: 100%;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes .box h3 {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes
+  .box
+  h3 {
   margin-bottom: 20px;
   font-size: 20px;
   text-align: center;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes .box .cta-btn {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes
+  .box
+  .cta-btn {
   width: 100%;
   height: 40px;
   border: 3px solid #000000;
@@ -994,10 +1254,27 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   font-weight: 700;
   transition: all 0.3s ease;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .manage .boxes .box .cta-btn:hover {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .manage
+  .boxes
+  .box
+  .cta-btn:hover {
   box-shadow: none;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .error {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .error {
   width: 100%;
   min-height: 190px;
   padding: 30px;
@@ -1005,7 +1282,15 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   justify-content: center;
   align-items: center;
 }
-.app-dashboard-page .hero-section .container .pools .table .table-box-rows .table-box-row .error p {
+.app-dashboard-page
+  .hero-section
+  .container
+  .pools
+  .table
+  .table-box-rows
+  .table-box-row
+  .error
+  p {
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -1065,7 +1350,7 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   width: 100%;
   padding: 15px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2.5fr 1fr 1fr;
   grid-gap: 35px;
 }
 @media only screen and (max-width: 1024px) {
@@ -1084,81 +1369,189 @@ tr .footer-component .container .footer-component-top .social-links a:last-child
   grid-template-columns: 1fr;
   grid-gap: 20px;
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row {
   width: 100%;
   border: 5px solid #000000;
   background: #f6f0ff;
   box-shadow: 5px 5px 0 #000000;
   border-radius: 35px;
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content {
   width: 100%;
   padding: 15px;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 2.5fr 1fr 1fr;
   grid-gap: 35px;
   align-items: center;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content {
     padding: 30px;
     grid-template-columns: 1fr;
   }
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .pool {
   display: flex;
   align-items: center;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .pool {
     flex-direction: column;
   }
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool img {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .pool
+  img {
   margin-right: 15px;
   width: 150px;
   border-radius: 20px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool img {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .pool
+    img {
     order: 2;
     margin-top: 10px;
     margin-right: 0;
   }
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool h3 {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  .pool
+  h3 {
   font-size: 17px;
   font-weight: 700;
   line-height: 27px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content .pool h3 {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    .pool
+    h3 {
     text-align: center;
   }
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p {
   font-size: 14px;
   font-weight: 700;
   line-height: 24px;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    p {
     font-size: 16px;
     line-height: 26px;
   }
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p.secondary {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p.secondary {
   color: rgba(0, 0, 0, 0.5);
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p span {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p
+  span {
   color: rgba(0, 0, 0, 0.5);
 }
-.app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p span.hidden {
+.app-pools-info-page
+  .hero-section
+  .container
+  .table
+  .table-box-rows
+  .table-box-row
+  .content
+  p
+  span.hidden {
   display: none;
 }
 @media only screen and (max-width: 1024px) {
-  .app-pools-info-page .hero-section .container .table .table-box-rows .table-box-row .content p span.hidden {
+  .app-pools-info-page
+    .hero-section
+    .container
+    .table
+    .table-box-rows
+    .table-box-row
+    .content
+    p
+    span.hidden {
     margin-bottom: 10px;
     display: block;
   }
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */
