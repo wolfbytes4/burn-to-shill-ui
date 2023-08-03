@@ -202,7 +202,7 @@ const LandingPage = ({ title }) => {
               </div>
 
               <img
-                src="/images/pages/landing-page/stake-section-img-1.png"
+                src="/images/pages/landing-page/stake-section-img-2.png"
                 alt=""
               />
             </div>
@@ -221,10 +221,7 @@ const LandingPage = ({ title }) => {
                 </p>
               </div>
 
-              <img
-                src="/images/pages/landing-page/stake-section-img-2.png"
-                alt=""
-              />
+              <img src="/images/brand/scrt-icon.svg" alt="" />
             </div>
           </div>
         </div>

@@ -34,6 +34,7 @@ const AppDashboardPage = ({ title, wClient }) => {
   const [contractsInfo, setContractsInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRewardsLoading, setIsRewardsLoading] = useState(true);
+  const [totalBurnValue, setTotalBurnValue] = useState("0000000");
 
   const [isPermitError, setIsPermitError] = useState(false);
   const [isQueryError, setIsQueryError] = useState(false);
@@ -41,6 +42,8 @@ const AppDashboardPage = ({ title, wClient }) => {
   const [pageSize, setPageSize] = useState(4);
   const [totalPages, setTotalPages] = useState();
   const [ownedTokens, setOwnedTokens] = useState([]);
+  const [collectionSize, setCollectionSize] = useState();
+
   const images = {
     SHILL: "/images/pages/app-dashboard-page/hero-section-img-1.png",
     Shillables: "/images/pages/landing-page/nfts-section-img-1.png",
@@ -98,18 +101,36 @@ const AppDashboardPage = ({ title, wClient }) => {
     });
 
     debugger;
+    let burnValue = 0;
     if (data.expected_rewards.length > 0) {
       ownedNfts.forEach((nft) => {
         const rewardInfo = data.expected_rewards.find(
           (reward) => reward.token_id === nft.token_id
         );
+        if (rewardInfo) {
+          burnValue +=
+            parseInt(rewardInfo.base_reward_expected) +
+            parseInt(rewardInfo.rank_reward_expected);
+        }
         nft.rewardInfo = rewardInfo;
       });
-
+      setTotalBurnValue(burnValue.toString());
       setOwnedTokens(ownedNfts);
     }
   };
 
+  const getCollectionSize = async (contract) => {
+    const q = { num_tokens: {} };
+    const data = await queryWrapper(
+      q,
+      contract.burn_info.nft_contract.address,
+      contract.burn_info.nft_contract.code_hash
+    ).catch((err) => {});
+
+    if (data) {
+      setCollectionSize(data.num_tokens.count);
+    }
+  };
   const tryResetPermit = async (contract) => {
     const permit = await resetPermit(
       walletClient.address,
@@ -166,6 +187,7 @@ const AppDashboardPage = ({ title, wClient }) => {
       };
     });
     //setOwnedTokens(tokenList);
+    getCollectionSize(contract);
     getPossibleRewards(contract, myTokens, tokenList);
     const totalPages = Math.ceil(tokenList.length / pageSize);
     setTotalPages(totalPages);
@@ -199,7 +221,7 @@ const AppDashboardPage = ({ title, wClient }) => {
   };
 
   const burn = async (nft) => {
-    toast.loading("🔥🔥🔥🔥Burning🔥🔥🔥🔥", {
+    toast.loading("🔥🔥🔥🔥 Burning... 🔥🔥🔥🔥", {
       position: "bottom-right",
       autoClose: false,
       hideProgressBar: true,
@@ -310,9 +332,10 @@ const AppDashboardPage = ({ title, wClient }) => {
               <h1>Dashboard</h1>
 
               <p>
-                Provided is an overview of all of your burned positions. Enter
-                into new positions and manage existing positions by depositing,
-                withdrawing, and claiming rewards.
+                BurnToShill Dashboard is the place to check on eligble burn
+                pools for NFT collections. Burning a NFT for $shill is
+                irreversible. Once your NFT has been burned it is gone forever,
+                reducing the overall collection size.
               </p>
             </div>
             {selectedContract && !isQueryError && (
@@ -399,9 +422,9 @@ const AppDashboardPage = ({ title, wClient }) => {
 
                   <p>Total NFTs in Wallet</p>
 
-                  <p>Total Burned</p>
+                  <p>Total Burn Value</p>
 
-                  <p>Rewards</p>
+                  <p>Collection Size</p>
 
                   <p></p>
                 </div>
@@ -440,16 +463,16 @@ const AppDashboardPage = ({ title, wClient }) => {
                           <span>
                             Total Burned <br />
                           </span>{" "}
-                          01/14 <br />{" "}
-                          <span style={{ display: "block" }}>NFTs</span>
+                          {totalBurnValue.slice(0, -6)} <br />{" "}
+                          <span style={{ display: "block" }}>$SHILL</span>
                         </p>
 
                         <p>
                           <span>
-                            Rewards <br />
+                            Collection Size <br />
                           </span>{" "}
-                          0.025 <br />{" "}
-                          <span style={{ display: "block" }}>$SHILL</span>
+                          {collectionSize} <br />{" "}
+                          <span style={{ display: "block" }}>NFTs</span>
                         </p>
 
                         {/* <button>Manage</button> */}

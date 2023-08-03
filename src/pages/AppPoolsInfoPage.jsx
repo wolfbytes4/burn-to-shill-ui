@@ -45,7 +45,9 @@ const AppPoolsInfoPage = ({ title, wClient }) => {
     const currentTime = Math.floor(Date.now() / 1000);
     const durationMilliseconds = (currentTime - burnCounterDate) * 1000;
     const hours = Math.floor(durationMilliseconds / (1000 * 60 * 60));
-    return (hours * bonusHourly).toString();
+    return hours * bonusHourly > 0
+      ? (hours * bonusHourly).toString()
+      : "0000000";
   };
 
   return (
@@ -59,10 +61,9 @@ const AppPoolsInfoPage = ({ title, wClient }) => {
           <h1>Pools and Allocation</h1>
 
           <p className="top-desc">
-            Below is a quick reference summary of the available pools and
-            burning limits, <br /> and while your choices depend on what you
-            have in your wallet, we’re happy to <br /> say that there’s an
-            option for everyone.
+            Check back regularly to see what collections have been added as well
+            as the shill rewards and possible shill bonuses for those
+            collections.
           </p>
           {isQueryError && (
             <div className="query-box">
@@ -103,9 +104,9 @@ const AppPoolsInfoPage = ({ title, wClient }) => {
                         <h3>{contract.burn_info.nft_contract.name}</h3>
                       </div>
                       <p className="secondary">
-                        If you have at least one{" "}
-                        {contract.burn_info.nft_contract.name} in your wallet,
-                        you can burn and start accruing rewards.
+                        Burning your NFT is irreversible. The contract will
+                        remove your NFT from the Collection and reward you with
+                        $shill.
                       </p>
 
                       <p>
