@@ -13,6 +13,7 @@ import LandingPage from "./pages/LandingPage";
 import AppPage from "./pages/AppPage";
 import AppDashboardPage from "./pages/AppDashboardPage";
 import AppPoolsInfoPage from "./pages/AppPoolsInfoPage";
+import AppBurnWallPage from "./pages/AppBurnWallPage";
 import WalletChangeDialog from "./components/WalletChangeDialog";
 
 // App
@@ -75,6 +76,17 @@ const App = () => {
           element={
             <AppPoolsInfoPage
               title={"App > Pools Info - BurnToShill"}
+              wClient={walletClient}
+            />
+          }
+        />
+
+        {/* Pools info page */}
+        <Route
+          path="/app/burn-wall"
+          element={
+            <AppBurnWallPage
+              title={"App > Burn Wall - BurnToShill"}
               wClient={walletClient}
             />
           }
