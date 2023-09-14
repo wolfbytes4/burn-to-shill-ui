@@ -28,7 +28,6 @@ const AppPoolsInfoPage = ({ title, wClient }) => {
   };
   const getContractsInfo = async () => {
     const q = { get_contracts_with_info: {} };
-    debugger;
     const data = await queryWrapper(
       q,
       import.meta.env.VITE_APP_BURN_MANAGER_CONTRACT_ADDRESS,

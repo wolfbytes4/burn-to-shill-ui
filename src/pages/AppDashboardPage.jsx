@@ -100,7 +100,6 @@ const AppDashboardPage = ({ title, wClient }) => {
       setIsRewardsLoading(false);
     });
 
-    debugger;
     let burnValue = {};
     contract.burn_info.reward_contracts.forEach((c) => {
       burnValue[c.name] = 0;
@@ -167,7 +166,6 @@ const AppDashboardPage = ({ title, wClient }) => {
     }
 
     setIsPermitError(permitError);
-    debugger;
     if (!permitError) {
       contractPermit = permit;
     }
@@ -175,7 +173,6 @@ const AppDashboardPage = ({ title, wClient }) => {
   };
 
   const setMyTokens = async (contract) => {
-    debugger;
     const wc = await getWalletClient();
     const myTokens = await queryOwnedTokens(
       wc.address,
