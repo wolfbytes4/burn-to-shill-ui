@@ -14,8 +14,8 @@ import Pagination from "@mui/material/Pagination";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
+import BurnDialog from "../components/burndialog/burndialog";
 
-import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -34,7 +34,7 @@ const AppDashboardPage = ({ title, wClient }) => {
   const [contractsInfo, setContractsInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRewardsLoading, setIsRewardsLoading] = useState(true);
-  const [totalBurnValue, setTotalBurnValue] = useState("0000000");
+  const [totalBurnValue, setTotalBurnValue] = useState();
 
   const [isPermitError, setIsPermitError] = useState(false);
   const [isQueryError, setIsQueryError] = useState(false);
@@ -101,20 +101,24 @@ const AppDashboardPage = ({ title, wClient }) => {
     });
 
     debugger;
-    let burnValue = 0;
+    let burnValue = {};
+    contract.burn_info.reward_contracts.forEach((c) => {
+      burnValue[c.name] = 0;
+    });
     if (data.expected_rewards.length > 0) {
       ownedNfts.forEach((nft) => {
-        const rewardInfo = data.expected_rewards.find(
-          (reward) => reward.token_id === nft.token_id
-        );
-        if (rewardInfo) {
-          burnValue +=
-            parseInt(rewardInfo.base_reward_expected) +
-            parseInt(rewardInfo.rank_reward_expected);
-        }
-        nft.rewardInfo = rewardInfo;
+        data.expected_rewards.forEach((rewards) => {
+          if (rewards.length > 0 && rewards[0].token_id === nft.token_id) {
+            nft.rewardInfo = rewards;
+            rewards.forEach((nftRewards) => {
+              burnValue[nftRewards.reward_contract_name] +=
+                parseInt(nftRewards.base_reward_expected) +
+                parseInt(nftRewards.rank_reward_expected);
+            });
+          }
+        });
       });
-      setTotalBurnValue(burnValue.toString());
+      setTotalBurnValue(burnValue);
       setOwnedTokens(ownedNfts);
     }
   };
@@ -220,7 +224,7 @@ const AppDashboardPage = ({ title, wClient }) => {
     setPage(page - 1);
   };
 
-  const burn = async (nft) => {
+  const burn = async (nft, message) => {
     toast.loading("🔥🔥🔥🔥 Burning... 🔥🔥🔥🔥", {
       position: "bottom-right",
       autoClose: false,
@@ -231,15 +235,22 @@ const AppDashboardPage = ({ title, wClient }) => {
       progress: undefined,
       theme: "dark",
     });
-
+    let expectedRewards = [];
+    nft.rewardInfo.forEach((info) => {
+      expectedRewards.push({
+        base_reward_expected: (
+          parseInt(info.base_reward_expected) +
+          parseInt(info.rank_reward_expected)
+        ).toString(),
+        bonus_expected: info.bonus_expected,
+        reward_contract_name: info.reward_contract_name,
+      });
+    });
     let msgEncoded = window.btoa(
       JSON.stringify({
         claim_burn_rewards: {
-          base_reward_expected: (
-            parseInt(nft.rewardInfo.base_reward_expected) +
-            parseInt(nft.rewardInfo.rank_reward_expected)
-          ).toString(),
-          bonus_expected: nft.rewardInfo.bonus_expected,
+          expected_rewards: expectedRewards,
+          message: message,
         },
       })
     );
@@ -353,24 +364,30 @@ const AppDashboardPage = ({ title, wClient }) => {
                   <p>Burn Reward</p>
 
                   <h3>
-                    {selectedContract.burn_info.reward_contract.base_reward.slice(
-                      0,
-                      -6
-                    )}{" "}
-                    $SHILL
-                    <br />
-                    {parseInt(
-                      selectedContract.burn_info.reward_contract.bonus_hourly
-                    ) > 0 && (
-                      <span>
-                        +
-                        {getBonusAmount(
-                          selectedContract.burn_info.reward_contract
-                            .bonus_hourly,
-                          selectedContract.burn_info.burn_counter_date
-                        ).slice(0, -6)}{" "}
-                        $SHILL Bonus
-                      </span>
+                    {selectedContract.burn_info.reward_contracts.map(
+                      (reward_contract, index) => (
+                        <div
+                          className={
+                            selectedContract.burn_info.reward_contracts.length >
+                            1
+                              ? "rewards"
+                              : "rewards-one"
+                          }
+                        >
+                          {reward_contract.base_reward.slice(0, -6)} $SHILL
+                          <br />
+                          {parseInt(reward_contract.bonus_hourly) > 0 && (
+                            <span>
+                              +
+                              {getBonusAmount(
+                                reward_contract.bonus_hourly,
+                                selectedContract.burn_info.burn_counter_date
+                              ).slice(0, -6)}{" "}
+                              ${reward_contract.name} Bonus
+                            </span>
+                          )}
+                        </div>
+                      )
                     )}
                   </h3>
                 </div>
@@ -461,10 +478,20 @@ const AppDashboardPage = ({ title, wClient }) => {
 
                         <p>
                           <span>
-                            Total Burned <br />
+                            Total Burn Value <br />
                           </span>{" "}
-                          {totalBurnValue.slice(0, -6)} <br />{" "}
-                          <span style={{ display: "block" }}>$SHILL</span>
+                          {totalBurnValue &&
+                            Object.keys(totalBurnValue).map((keyName, i) => (
+                              <>
+                                {totalBurnValue[keyName]
+                                  .toString()
+                                  .slice(0, -6)}{" "}
+                                <br />{" "}
+                                <span style={{ display: "block" }}>
+                                  ${keyName}
+                                </span>
+                              </>
+                            ))}
                         </p>
 
                         <p>
@@ -498,66 +525,71 @@ const AppDashboardPage = ({ title, wClient }) => {
                                       Total Reward:{" "}
                                     </div>
                                     <div className="total-reward-text">
-                                      {nft.rewardInfo.total_expected.slice(
-                                        0,
-                                        -6
-                                      )}{" "}
-                                      $SHILL
-                                      <HtmlTooltip
-                                        title={
-                                          <>
-                                            <div className="reward-box">
-                                              <div className="reward-label">
-                                                Base Reward:{" "}
-                                              </div>
-                                              <div className="reward-text">
-                                                {nft.rewardInfo.base_reward_expected.slice(
-                                                  0,
-                                                  -6
-                                                )}
-                                              </div>
-                                            </div>
-                                            <div className="reward-box">
-                                              <div className="reward-label">
-                                                Rank Reward:{" "}
-                                              </div>
-                                              <div className="reward-text">
-                                                {nft.rewardInfo
-                                                  .rank_reward_expected !== "0"
-                                                  ? nft.rewardInfo.rank_reward_expected.slice(
+                                      {nft.rewardInfo.map((info) => (
+                                        <div>
+                                          {info.total_expected.slice(0, -6)} $
+                                          {info.reward_contract_name}
+                                          <HtmlTooltip
+                                            title={
+                                              <>
+                                                <div className="reward-box">
+                                                  <div className="reward-label">
+                                                    Base Reward:{" "}
+                                                  </div>
+                                                  <div className="reward-text">
+                                                    {info.base_reward_expected.slice(
                                                       0,
                                                       -6
-                                                    )
-                                                  : "0"}
-                                              </div>
-                                            </div>
-                                            <div className="reward-box">
-                                              <div className="reward-label">
-                                                Bonus Reward:{" "}
-                                              </div>
-                                              <div className="reward-text">
-                                                {nft.rewardInfo.bonus_expected.slice(
-                                                  0,
-                                                  -6
-                                                )}
-                                              </div>
-                                            </div>
-                                          </>
-                                        }
-                                      >
-                                        <FontAwesomeIcon
-                                          icon={faQuestionCircle}
-                                          className="tooltip-icon"
-                                        />
-                                      </HtmlTooltip>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                                <div className="reward-box">
+                                                  <div className="reward-label">
+                                                    Rank Reward:{" "}
+                                                  </div>
+                                                  <div className="reward-text">
+                                                    {info.rank_reward_expected !==
+                                                    "0"
+                                                      ? info.rank_reward_expected.slice(
+                                                          0,
+                                                          -6
+                                                        )
+                                                      : "0"}
+                                                  </div>
+                                                </div>
+                                                <div className="reward-box">
+                                                  <div className="reward-label">
+                                                    Bonus Reward:{" "}
+                                                  </div>
+                                                  <div className="reward-text">
+                                                    {info.bonus_expected.slice(
+                                                      0,
+                                                      -6
+                                                    )}
+                                                  </div>
+                                                </div>
+                                              </>
+                                            }
+                                          >
+                                            <FontAwesomeIcon
+                                              icon={faQuestionCircle}
+                                              className="tooltip-icon"
+                                            />
+                                          </HtmlTooltip>
+                                        </div>
+                                      ))}
                                     </div>
                                   </div>
-                                  <button
+                                  {/* <button
                                     className="cta-btn"
                                     onClick={() => burn(nft)}
                                   >
                                     Burn
-                                  </button>
+                                  </button> */}
+                                  <BurnDialog
+                                    burn={burn}
+                                    nft={nft}
+                                  ></BurnDialog>
                                 </div>
                               );
                             })}

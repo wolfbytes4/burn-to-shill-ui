@@ -116,21 +116,22 @@ const AppPoolsInfoPage = ({ title, wClient }) => {
                       </p>
 
                       <p>
-                        <span className="hidden">Rewards Emissions:</span>
-                        {contract.burn_info.reward_contract.base_reward.slice(
-                          0,
-                          -6
-                        )}{" "}
-                        <br /> <span>$SHILL base</span>
-                        {parseInt(
-                          contract.burn_info.reward_contract.bonus_hourly
-                        ) > 0}
-                        <br />
-                        {getBonusAmount(
-                          contract.burn_info.reward_contract.bonus_hourly,
-                          contract.burn_info.burn_counter_date
-                        ).slice(0, -6)}{" "}
-                        <br /> <span>Bonus</span>
+                        <span className="hidden">Possible Rewards:</span>
+                        {contract.burn_info.reward_contracts.map(
+                          (reward_contract) => (
+                            <div>
+                              {reward_contract.base_reward.slice(0, -6)}{" "}
+                              <span>${reward_contract.name} base</span>
+                              {parseInt(reward_contract.bonus_hourly) > 0}
+                              <br />
+                              {getBonusAmount(
+                                reward_contract.bonus_hourly,
+                                contract.burn_info.burn_counter_date
+                              ).slice(0, -6)}{" "}
+                              <span>Bonus</span>
+                            </div>
+                          )
+                        )}
                       </p>
                     </div>
                   </div>
