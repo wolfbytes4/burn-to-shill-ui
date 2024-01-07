@@ -38,8 +38,10 @@ const AppBurnWallPage = ({ title, wClient }) => {
           var nftBurns = await getRecentBurns(
             contract.address,
             contract.code_hash,
-            totalPages - 1,
-            pageSize
+            0,
+            num
+            // totalPages - 1,
+            // pageSize
           );
 
           nftBurns.forEach((item) => {

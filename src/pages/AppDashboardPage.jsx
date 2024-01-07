@@ -198,6 +198,7 @@ const AppDashboardPage = ({ title, wClient }) => {
     setActivePool(index);
     setSelectedContract(contract);
     if (reload) {
+      const permitError = await tryGetPermit(contract);
       setMyTokens(contract);
     }
   };
